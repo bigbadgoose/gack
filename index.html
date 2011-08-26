@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>GACK Sample Page</title>
+    <!--
+         __   _      __           __
+        / /  (_)__ _/ /  ___ ____/ /__ ____  ___  ___ ___
+       / _ \/ / _ `/ _ \/ _ `/ _  / _ `/ _ \/ _ \(_-</ -_)
+      /_.__/_/\_, /_.__/\_,_/\_,_/\_, /\___/\___/___/\__/
+             /___/               /___/
+    -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script>
+      var _gaq=[['_setAccount','UA-xxxxxxxx-1'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+      g.src=('https:'==location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+    <script src="gack.js"></script>
+  </head>
+  <body>
+
+    Change background:
+    <select id="background" class="GAE-select">
+      <option value="ffdddd"
+              data-gae="ui.user_color">red</option>
+      <option value="ddffdd"
+              data-gae="ui.user_color">green</option>
+      <option value="ddddff"
+              data-gae="ui.user_color">blue</option>
+      <option value="ffffff"
+              data-gae="ui.user_color">white</option>
+    </select>
+
+    <hr />
+
+    <a href="#"
+       data-gae="conversion.offers.free_secret">Click here to receive a FREE SECRET OFFER</a>
+
+    <hr />
+
+    <h3>Dean Mao</h3>
+    <p>Architect</p>
+    <p>Dean is a seasoned technical guru, entrepreneur, and hacker phenom</p>
+    <a href="http://www.linkedin.com/profile/view?id=3165767"
+       data-gae="diligence.linkedin.dean" target="_blank"
+       class="GAE">linkedin</a>
+    <a href="https://github.com/deanmao"
+       data-gae="diligence.github.dean"
+       class="GAE">github</a>
+    <a href="http://twitter.com/#!/deanmao"
+       data-gae="diligence.twitter.dean"
+       class="GAE">twitter</a>
+
+    <hr />
+
+    <h3>Austin Chau</h3>
+    <p>Mobile Technologies</p>
+    <p>Austin has worked in the biggest companies on the biggest projects,
+      without breaking a sweat</p>
+    <a href="http://www.linkedin.com/profile/view?id=7904039"
+       data-gae="diligence.linkedin.austin"
+       class="GAE">linkedin</a>
+    <a href="https://github.com/austinchau"
+       data-gae="diligence.github.austin"
+       class="GAE">github</a>
+
+    <hr />
+
+    <h3>Doug Lee</h3>
+    <p>Product and design</p>
+    <p>Doug creates product experiences with exacting detail and joy</p>
+    <a href="http://www.linkedin.com/profile/view?id=44109758"
+       data-gae="diligence.linkedin.doug"
+       class="GAE">linkedin</a>
+    <a href="https://github.com/duggi"
+       data-gae="diligence.github.doug"
+       class="GAE">github</a>
+    <a href="http://twitter.com/#!/duggiwuggi"
+       data-gae="diligence.twitter.doug"
+       class="GAE">twitter</a>
+    <a href="http://dribbble.com/duggiwuggi"
+       data-gae="diligence.dribbble.doug"
+       class="GAE">dribbble</a>
+
+    <hr />
+
+    <h3>Cammi</h3>
+    <p>Successful business dog</p>
+    <p>Cammi has skyrocketed through the ranks to become the most successful
+      business dog of all time!</p>
+    <p>Woof! Woof!</p>
+
+    <hr />
+
+    <button class="GAE-click demandcast"
+            data-gae="demand.vcard_download">Download as vCards</button>
+    <button class="GAE-click demandcast"
+            data-gae="demand.generate_qrcode">Generate QR Codes</button>
+
+  </body>
+
+
+  <script>
+    $(function() {
+      // ----- http links in new window
+      $("a[href^='http']").attr('target','_blank');
+
+      // ----- GAE clicks
+      $('.GAE-click').click(function() {
+        GA.trackEvent($(this).data('gae').split('.'));
+      });
+
+      // ----- GAE selects
+      $('.GAE-select').change(function() {
+        $('.GAE-select option:selected').each(function() {
+          //var gae = $(this).attr('data-gae') + "." + $(this).attr('value');
+          var gae = $(this).attr('data-gae') + "." + $(this).val();
+          GA.trackEvent(gae.split('.'));
+        });
+      });
+
+      // ----- background color change
+      $('#background').change(function() {
+        $('body').css('background', '#' + $(this).val());
+      });
+
+      // ----- demand forecasting
+      $('.demandcast').click(function() {
+        alert('this feature is coming soon!');
+      });
+
+    });
+  </script>
+
+</html>
+
